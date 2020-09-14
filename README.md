@@ -121,6 +121,13 @@ ALL: ALL
 
 > netstat -tulpen
 
++ dstat
+
+> yum install dstat
+
+> dstat -n
+> dstat --output output.csv
+
 ## network Monitoring & Reporting
 ## Implementing Packet Filtering
 ## Managing Remote Access
