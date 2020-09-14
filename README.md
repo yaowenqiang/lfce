@@ -153,9 +153,24 @@ ALL: ALL
 
 ### Managing /proc Network parameters
 
-
+> sysctl -a
+> sysctl -a | grep net
+> cd /proc/sys/net
+> yum search kernel | grep doc
+> yum install kernel-doc
+> cd /usr/share/doc/kernel-doc-3.10.0
+> grep -Rl dsack 2>/dev/null
+> networking/ip-sysctl.txt
+> ls networking/ip-syctl.txt
+> /tcp_wmem
 
 ### Producing system Report Using sar
+
+> yum install sysstat
+> /etc/cron.d/sysstat
+> /var/log/sa 
+> sar -n ALL
+
 ### Using ss to Monitor Network Service Availiablity
 ### Using nmap to Verify Remote Port Availiablity
 
