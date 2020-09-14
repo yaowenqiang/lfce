@@ -122,6 +122,39 @@ ALL: ALL
 > netstat -tulpen
 
 ## network Monitoring & Reporting
+
+### Monitoring Network Performance
+
++ ifconfig
++ ip -s link
++ ethtool -S eth0
++ iptraf
+
+> yum install iptraf-ng
+> iptraf-ng
+
++ ntop
+> listen on 3000
+
+> apt install ntop
+
+### Understanding Network Performance parameters
+
+> MTU
+> TCP slide window
+
+
+### Managing /proc Network parameters
+
+
+
+### Producing system Report Using sar
+### Using ss to Monitor Network Service Availiablity
+### Using nmap to Verify Remote Port Availiablity
+
+
+
+
 ## Implementing Packet Filtering
 ## Managing Remote Access
 
