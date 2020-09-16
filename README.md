@@ -172,9 +172,27 @@ ALL: ALL
 > sar -n ALL
 
 ### Using ss to Monitor Network Service Availiablity
+
+
+> ss -tuna # don't resolve service names
+> ss -ltn 
+> ss -at '( dport = :ssh or sport = :ssh )'
+> ss -at dst :443 or dst :80
+
+
 ### Using nmap to Verify Remote Port Availiablity
 
+> nmap -sn 192.168.1.1
+> nmap 192.168.1.0/24
+> nmap -O 192.168.1.0/24 # check target operation system
+> nmap -sS -sU -Pn 192.168.1.1
+> nmap -sS -sU -Pn -o 1-56635 192.168.1.1
+> nmap -sA 192.168.1.1 # firework scan
+> man nmap
 
+
+> ethtool -S eth0
+> ssh -tuna
 
 
 ## Implementing Packet Filtering
