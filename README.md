@@ -196,6 +196,64 @@ ALL: ALL
 
 
 ## Implementing Packet Filtering
+
+### Understanding Linux Firewall Solutions
+
++ firewalld
++ ufw
++ susefirewall
+
+
+### Understanding Iptables Working
+
+
+
+### Setting up a Basic Iiptables Configurations
+
+> systemctl status firewalld
+> systemctl disable --now firewalld
+> systemctl mask firewalld
+
+> yum install iptables-services iptables-utils
+> iptables -L
+> ipables -P INPUT DROP
+> ipables -P FORWARD DROP
+> ipables -P input DROP
+
+> iptables -A INPUT -i lo -j ACCEPT
+> iptables -A OUTPUT -i lo -j ACCEPT
+
+> iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+> iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+> iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# DNS
+> iptables -I INPUT 2 -p tcp --dport 53 -j ACCEPT
+> iptables -I INPUT 2 -p udp --dport 53 -j ACCEPT
+
+> iptables -A OUT  -m state --state ESTABLISHED,RELEATED -j ACCEPT
+> iptables -A OUT -p tcp --dport 80 -j ACCEPT
+> iptables -A OUT -p tcp --dport 443 -j ACCEPT
+> iptables -A OUT -p tcp --dport 22 -j ACCEPT
+> iptables -L -v
+
+
+
+### Making the Iptables Configuration Persistent
+
+> iptables-save > /etc/sysconfig/iptables
+
+### Configuring Iptables NAT
+
+
+### Implementing Packet Filtering
+### Using Logging for Iptabales Troubleshooting
+### Configuring Port Forwarding in Iptables
+
+
+
+
+
 ## Managing Remote Access
 
 
