@@ -245,10 +245,38 @@ ALL: ALL
 
 ### Configuring Iptables NAT
 
+> iptables -A INPUT -p icmp -j ACCEPT
+> cat /proc/sys/net/ipv4/ip_forward
+> vim /etc/sysctl.conf
+> cd /usr/lib/sysctl.d/
+> grep ip_forward *
+> cd /etc/sysctl.d/
+> net.ipv4.ip_forward = 1
+> iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+> iptables -t nat -A FORWARD -i eth0  -o eth0  --state  RELATED,ESTABLISHED -j ACCEPT
+> iptables -A FORWARD -i eth0 -o eth0 -j ACCEPT
+
+
 
 ### Implementing Packet Filtering
 ### Using Logging for Iptabales Troubleshooting
+
+> iptables -A INPUT -j LOG
+> iptables -A OUTPUT -j LOG
+> cat /var/log/messages
+> iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
+> systemctl restart iptables
+> iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
+> iptables -A INPUT -j LOG
+> iptables -A OUTPUT -j LOG
+> cat /etc/services
+
+
 ### Configuring Port Forwarding in Iptables
+
+> iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 2222 -j DNAT --t o10.0.0.20:22
+> iptables -L -t nat
+> grep 2222 /proc/net/nf_contrac
 
 
 
