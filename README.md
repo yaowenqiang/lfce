@@ -283,7 +283,124 @@ ALL: ALL
 
 
 ## Managing Remote Access
+### An introduction to Croptography
 
+
+Introducing Cryptography
+
++ Cryptography has different goals
+  + Data integrity
+  + Confidentiality
+  + Authentication
+  + Non-repudication
++ The two main tchonologies are shared secrect and public/private key encryption
+
+
+Symmetric Key Disadvantages
+
++ A secure channel must exist for exchanging keys 
++ Keys should be changed frequently
++ For 1 to n communications, a unique key must exists for every communications channel
++ This make key management a real challenge
+
+
+Shared Secrets
+
++ Sender and receiver use the same key to produce scrambled data
++ Block ciphers are the common approach, where blocks of data are scrambled
++ DES and AES are common standards, but old
+  + Triple DES currently is still used often
++ Shared secret cryptography isn't very secure, but it's fast
++ Hashing is a technology where a longer string is represented by a shorter string
+  + 2 strings will never generate the same hash
+  + Used in password encryption
+  + MD%, SHA and Bluwfish are current hashing technologies
+
+Public Key Cryptography
+
++ Public key is commonly availiable; private key is derived from the public key and kept as a secret
++ Private keys uses
+  + Decryption of messages that are encrypted with the public key of the recipient
+  + Signing of messages
+  + Non-repudiation
++ Certificate authority is required to guarantee the authenticity of a key
+
+
+### Configuring SSH Key Based Authentication
+
+> ssh-keygen -t dsa
+> ssh-copy-id 192.168.1.2
+> ssh-agent /bin/bash
+> ssh-add
+
+
+
+
+### Configuring SSH Tunneling and Port Forwarding
+
+SSH Port Forwarding
+
++ From server1, type ssh -fNL 4444:rhacert.com:80 root@server2.example.com
+
+> curl localhost:444  -> get rhacert.com content
+> lsof -i4TCP:4444  | grep LISTEN
+
+
+
++ Compare to ssh -fNL 5555:localhost:80 root@192.168.10.10 where you'll see the webpage on server2, it's localhost on the server you'are connecting to, not on your actual server
+
+
+> curl localhost:5555 > gget 80 on 192.168.10.10
++ Test with elinks http://localhost:4444
++ Remote port forwarding is less common and can be used to connect to a local port (which cannot be reached from the internet) to a port on a server that is available on the internet
+  + ssh -的 80:localhost:8086 user@lab.xxx.com
+  + You must change GatewayPorts and set to yes on your local machine for this to work
++ Monitor tunnels with lsof -i -n | grep sshd or netstat -tupen
+
+### Optimizing SSH Performance
+
+> man sshd_config
+
+> vim /etc/ssh/sshd_config
+
+> port
+> listenAddress
+> PermitRootLogin 
+> AllowUseers username
+> MaxSessions
+> PasswordAuthentication 
+> GSSAPIAuthentication 
+> UseDNS
+> TCPKeepAlive 
+> ClientAliveInterval
+> ClientAliveCountMax
+
+### Managing SSH Client Options
+
+> man ssh_config
+
+> ForwardX11 
+> StrictHostKeyChecking
+> GSSAPIAuthentication  no
+
+
+### Transfering Files Securely over the Network
+
+> scp
+> rsync
+> yum provides */rsync
+> yum insjtall -y rsync
+> rysnc -r /rsync/ root@192.168.10.10:/rsync/
+> dd if=/dev/zero of=bigfile bs=2m count=100
+> rysnc -rv /rsync/ root@192.168.10.10:/rsync/
+
+### Troubleshooting SSH issues
+
+> sed -i -e '3d' .ssh/known_hosts
+
+
+
+### Configuring VNC Server
 
 
 
