@@ -402,6 +402,11 @@ SSH Port Forwarding
 
 ### Configuring VNC Server
 
+> yum install -y tigervnc-server
+> yum install -y tigervnc
+> cat /usr/lib/systemd/system/vncserver@.service
+> cp /usr/lib/systemd/system/vncserver@.service /usr/lib/systemd/system/vncserver@:1.service
+
 
 
 
@@ -416,6 +421,49 @@ SSH Port Forwarding
 ## Nginx
 # Managing Mail Services
 # Managing Infrastructure Services
-## DNS
+## Managing DNS Server
+### Understanding DNS Name Resolution
+
+
+
+### Using /etc/hosts and /etc/nsswitch.conf
+
+
+> cat /etc/nsswitch.conf
+
+> hosts files dns myhostname
+
+> info libc "Name Service Switch"
+
+### Configuring Unbound as a Cache-only DNS Server
+
+> yum install -y unbound
+> apt install -y unbound
+
+> vim /etc/unbound/unbound.conf
+
+> interface: 0.0.0.0
+> access-control: 0.0.0.0 allow
+> forward-zone: 
+               name: "."
+               forward-addr: 8.8.8.8
+> domain-insecure: "example.com"
+
+> systemctl restart unbound
+> systemctl status unbound
+> systemctl status -l unbound
+> netstat -ntlpue4
+
+> snap install network-manager
+
+> dig example.com
+
+
+
+
+### Setting up a Master Bind Name Server
+### Using Dig for DNS troubleShooting
+### Opening the Firewall for DNS traffic
+
 ## Docker Containers
 ## Setting up an IPA server as a central LDAP and certificate server
